@@ -1,0 +1,432 @@
+<!-- 
+    This html page display side by side 2 PM with all the data/graph from the local address http://192.168.1.10/values and from the madavi website 
+    It also list all the usefull link to luftdaten map, grafana, download csv and opensensemap
+    
+    To use this html, replace "YOUR ID"
+
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+        <link rel="icon" href="Favicon pollution.png">
+
+
+    <style>
+        table { border-collapse: collapse; }
+        tr { border: none; }
+        td:not(:last-child),th:not(:last-child) {
+          border-right: solid 2px black; 
+          padding: 5px;
+        }
+        /**https://www.rapidtables.com/web/color/html-color-codes.html    **/
+        .out {
+            background-color: #C9FEB3;
+        }
+        .in {
+            background-color: #FFFBA6;
+        }
+        .outnow {
+            background-color: #C9FEB3;
+        }
+        .innow {
+            background-color: #FFFBA6;
+        }
+        .out24h {
+            background-color: #B4FF95;
+        }
+        .in24h {
+            background-color: #FDF894;
+        }
+        .out7d {
+            background-color: #9BFF71;
+        }
+        .in7d {
+            background-color: #FFF874;
+        }
+        .out7dav {
+            background-color: #8BFF5B  ;
+        }
+        .in7dav {
+            background-color: #FFF75B;
+        }
+        .outmonth {
+            background-color: #8BFF5B  ;
+        }
+        .inmonth {
+            background-color: #FFF75B;
+        }
+        .outyear {
+            background-color: #8BFF5B  ;
+        }
+        .inyear {
+            background-color: #FFF75B;
+        }
+        </style>
+</head>
+
+<body>
+    <!-- Timer  -->
+    <div style="float:left;"><span id="time"><span id="counter">0</span> seconds since last refresh</span> </div>
+    <div style="float:right;">Jump to: <a href="#week">last 7 days</a> ― <a href="#weekaverage">average last 7 days</a> ― <a href="#month">last 30 days</a>― <a href="#year">last 12 months</a><a id="top"></a></div>
+    <table style="width:100%" align="center">
+
+        <!-- Title ext/int with link to  page madavi -->
+        <tr>
+            <th class="out">
+                <a target="_blank" href="https://www.madavi.de/sensor/graph.php?sensor=esp8266-YOUR ID-sds011">Outdoor</a><br>
+                <a target="_blank" href="https://maps.luftdaten.info/grafana/d-solo/000000004/single-sensor-view?orgId=1&panelId=2&var-node=YOUR ID">zoomable
+                    last 24h</a>  ―  <a target="_blank" href="https://opensensemap.org/explore/YOUR ID">openSenseMap</a>  ―  <a target="_blank" href="https://maps.luftdaten.info/#4/48.35/13.32 ">Luftdaten id = YOUR ID </a>  ―  <a target="_blank" href="https://www.madavi.de/sensor/csvfiles.php?sensor=esp8266-YOUR ID">CSV YOUR ID </a>
+            </th>
+            <th class="in">
+                <a target="_blank" href="https://www.madavi.de/sensor/graph.php?sensor=esp8266-YOUR ID-sds011"> Indoor</a><br>
+                <a target="_blank" href="https://opensensemap.org/explore/YOUR ID">openSenseMap</a>  ―  <a target="_blank" href="https://www.madavi.de/sensor/csvfiles.php?sensor=esp8266-YOUR ID">CSV 33065</a>
+            </th>
+        </tr>
+        
+
+        <!-- display widget from openstreetmap but not a nice  widget  -->
+        <!-- <tr>
+            <td class="outnow">
+                <iframe src="https://sensebox.github.io/opensensemap-widget/iframe.html?senseboxId=YOUR ID&initialTab=sensors"
+                    width="400" height="600" marginwidth="8" marginheight="8" hspace="0" vspace="0" frameborder="0"
+                    scrolling="no"></iframe>
+
+            </td>
+            <td class="outnow">
+                <iframe src="https://sensebox.github.io/opensensemap-widget/iframe.html?senseboxId=YOUR ID&initialTab=graph"
+                    width="200" height="600" marginwidth="8" marginheight="8" hspace="0" vspace="0" frameborder="0"
+                    scrolling="no"></iframe>
+
+            </td>
+        </tr> -->
+
+        <!-- table with last measure -->
+        <tr>
+            <td class="outnow"><iframe id="out" src="http://192.168.1.10/values" width="600px" height="400"></iframe>
+                <!-- object id="out" type="text/html" data="http://192.168.1.10/values" width="600px" height="600px" style="overflow:auto">
+                </object-->
+            </td>
+            <td class="innow"><iframe id="out" src="http://192.168.1.15/values" width="600px" height="400"></iframe>
+                <!-- <object type="text/html" data="http://192.168.1.15/values" width="600px" height="400" style="overflow:auto">
+                </object> -->
+
+            </td>
+        </tr>
+
+<!-- LAST 24 Hours -->
+        <tr>
+            <td class="out24h"><center><b>PM10 (last 24 hours)</b></center></td>
+            <td class="in24h"><center><b>PM10 (last 24 hours)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out24h">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-day.png">
+            </td>
+            <td class="in24h">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-day.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out24h"><center><b>PM2.5 (last 24 hours)</b></center></td>
+            <td class="in24h"><center><b>PM2.5 (last 24 hours)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out24h">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-day.png">
+            </td>
+            <td class="in24h">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-day.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out24h"><center><b>Temperature (last 24 hours)</b></center></td>
+            <td class="in24h"><center><b>Temperature (last 24 hours)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out24h">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-day.png">
+            </td>
+            <td class="in24h">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-day.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out24h"><center><b>Humidity (last 24 hours)</b></center></td>
+            <td class="in24h"><center><b>Humidity (last 24 hours)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out24h">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-day.png">
+            </td>
+            <td class="in24h">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-day.png">
+            </td>
+        </tr>
+
+
+<!-- LAST 7 days -->
+        <tr>
+            <td class="out7d"><a id="week"></a><center><b>PM10 (last 7 days)</b></center></td>
+            <td class="in7d"><center><b>PM10 (last 7 days)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out7d">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-week.png">
+            </td>
+            <td class="in7d">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-week.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out7d"><center><b>PM2.5 (last 7 days)</b></center></td>
+            <td class="in7d"><center><b>PM2.5 (last 7 days)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out7d">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-week.png">
+            </td>
+            <td class="in7d">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-week.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out7d"><center><b>Temperature (last 7 days)</b></center></td>
+            <td class="in7d"><center><b>Temperature (last 7 days)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out7d">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-week.png">
+            </td>
+            <td class="in7d">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-week.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out7d"><center><b>Humidity (last 7 days)</b></center></td>
+            <td class="in7d"><center><b>Humidity (last 7 days)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out7d">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-week.png">
+            </td>
+            <td class="in7d">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-week.png">
+            </td>
+        </tr>
+
+<!-- Average last 7 days   -->
+        <tr>
+            <td class="out7dav"><a id="weekaverage"></a><center><b>PM10 (average last 7 days)</b></center></td>
+            <td class="in7dav"><center><b>PM10 (average last 7 days)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out7dav">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-floating.png">
+            </td>
+            <td class="in7dav">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-floating.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out7dav"><center><b>PM2.5 (average last 7 days)</b></center></td>
+            <td class="in7dav"><center><b>PM2.5 (average last 7 days)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out7dav">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-floating.png">
+            </td>
+            <td class="in7dav">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-floating.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out7dav"><center><b>Temperature (average last 7 days)</b></center></td>
+            <td class="in7dav"><center><b>Temperature (average last 7 days)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out7dav">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-floating.png">
+            </td>
+            <td class="in7dav">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-floating.png">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="out7dav"><center><b>Humidity (average last 7 days)</b></center></td>
+            <td class="in7dav"><center><b>Humidity (average last 7 days)</b></center></td>
+        </tr>
+        <tr>
+            <td class="out7dav">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-floating.png">
+            </td>
+            <td class="in7dav">
+                <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-floating.png">
+            </td>
+        </tr>
+
+
+
+<!-- LAST 30 days -->
+<tr>
+        <td class="outmonth"><a id="month"></a><center><b>PM10 (last 30 days)</b></center></td>
+        <td class="inmonth"><center><b>PM10 (last 30 days)</b></center></td>
+    </tr>
+    <tr>
+        <td class="outmonth">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-month.png">
+        </td>
+        <td class="inmonth">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-month.png">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="outmonth"><center><b>PM2.5 (last 30 days)</b></center></td>
+        <td class="inmonth"><center><b>PM2.5 (last 30 days)</b></center></td>
+    </tr>
+    <tr>
+        <td class="outmonth">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-month.png">
+        </td>
+        <td class="inmonth">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-month.png">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="outmonth"><center><b>Temperature (last 30 days)</b></center></td>
+        <td class="inmonth"><center><b>Temperature (last 30 days)</b></center></td>
+    </tr>
+    <tr>
+        <td class="outmonth">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-month.png">
+        </td>
+        <td class="inmonth">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-month.png">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="outmonth"><center><b>Humidity (last 30 days)</b></center></td>
+        <td class="inmonth"><center><b>Humidity (last 30 days)</b></center></td>
+    </tr>
+    <tr>
+        <td class="outmonth">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-month.png">
+        </td>
+        <td class="inmonth">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-month.png">
+        </td>
+    </tr>
+
+
+
+<!-- LAST 12 months days -->
+<tr>
+        <td class="outyear"><a id="year"></a><center><b>PM10 (last 12 months)</b></center></td>
+        <td class="inyear"><center><b>PM10 (last 12 months)</b></center></td>
+    </tr>
+    <tr>
+        <td class="outyear">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-year.png">
+        </td>
+        <td class="inyear">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-1-year.png">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="outyear"><center><b>PM2.5 (last 12 months)</b></center></td>
+        <td class="inyear"><center><b>PM2.5 (last 12 months)</b></center></td>
+    </tr>
+    <tr>
+        <td class="outyear">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-year.png">
+        </td>
+        <td class="inyear">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-sds011-25-year.png">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="outyear"><center><b>Temperature (last 12 months)</b></center></td>
+        <td class="inyear"><center><b>Temperature (last 12 months)</b></center></td>
+    </tr>
+    <tr>
+        <td class="outyear">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-year.png">
+        </td>
+        <td class="inyear">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-1-year.png">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="outyear"><center><b>Humidity (last 12 months)</b></center></td>
+        <td class="inyear"><center><b>Humidity (last 12 months)</b></center></td>
+    </tr>
+    <tr>
+        <td class="outyear">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-year.png">
+        </td>
+        <td class="inyear">
+            <img width="600px" src="https://www.madavi.de/sensor/images/sensor-esp8266-YOUR ID-dht-25-year.png">
+        </td>
+    </tr>
+    </table>
+
+    <script>
+        // stopwatch
+        //https://jsfiddle.net/Daniel_Hug/pvk6p/
+
+        var counter = document.getElementById('counter'),
+            seconds = 0,
+            t;
+
+        function add() {
+            seconds++;
+            if (seconds <= 145) {
+                counter.textContent = seconds;
+                timer();
+            } else {
+                var divtime = document.getElementById('time');
+                divtime.textContent = "more than 145 second since last refresh";
+                clearTimeout(t);
+            }
+        }
+
+
+        function timer() {
+            t = setTimeout(add, 1000);
+        }
+        timer();
+    </script>
+</body>
+
+</html>
