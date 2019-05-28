@@ -11,6 +11,8 @@ This html script access all the data of two luftdaten PM sensors (Indoor and Out
 `PM general.py` displays the PM10 value of a luftdaten PM sensor in the systray (tested on Windows 10).  
 You can have several icons displaying the data from several sensors but using (duplicating) the `PM1.py` script. 
 
+Use this [version](https://github.com/MagTun/infi.systray/tree/develop/src/infi/systray) of sys.tray (so the context menu of icon are updated when mute/unmute)
+
 <img src="PM%20watch%20in%20systray/Printscreen%20of%20systray.png" width="360" height="180">
 
 
