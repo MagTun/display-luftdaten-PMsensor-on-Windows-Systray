@@ -228,5 +228,26 @@ def sendemail(sender, to, subject="", message_text_plain="", message_text_html="
     sent = send_message(service, 'me', message1)
 
 
+def main():
+
+    # ============================================================== ¤ send email with
+    os.chdir(sys.path[0])
+    to = "some email@gmail.com"  # modify this
+    sender = "some email @gmail.com"  # modify this
+    subject = "From def main"
+    # Some users can only see plain text so it may be usefull to join plain + html
+    message_text_html = r'Hi<br/>This is an Html <b>email</b> <font color="red">Great!</font><p></p>'
+    message_text_plain = "Hi, message with only text,\n not html"
+    file = ""
+    message_cc = ""  # modify this  if needed
+    message_bcc = ""  # modify this  if needed
+    service = service_account_login()
+
+    message1 = create_Message_with_attachment(
+        sender, to, subject, message_text_plain, message_text_html, file, message_cc, message_bcc)
+
+    sent = send_message(service, 'me', message1)
+
+
 if __name__ == "__main__":
     main()
