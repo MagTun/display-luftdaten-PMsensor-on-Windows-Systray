@@ -55,10 +55,10 @@ After 3-5 seconds, you should see the icon with the PM displayed in you systray.
   
    - For emails alert:  
       - The script uses the GMAIL API so you need a Gmail account. You also need to install the gmail API follow this tuto: https://developers.google.com/gmail/api/quickstart/python?authuser=2 (if you have multiple active Gmail account, replace the 2 at the end of the url by the corresponding Gmail account number you want to use to send the alerts).  
-      - With this tuto, you will download the required libraries for the Gmail API, enable a Google developer account (it’s free), enable the Gmail API on your Google developer account and download the required credentials so you script won’t be blocked by Gmail when it sends an email with your Gmail account.  
+      - With this tuto, you will download the required libraries for the Gmail API, enable a Google developer account (it’s free), enable the Gmail API on your Google developer account and download the first credentials
 
 - Download all the files in [this folder](https://github.com/MagTun/luftdaten-stuff/tree/master/PM%20watch%20in%20systray/Main%20app) and [this folder](https://github.com/MagTun/luftdaten-stuff/tree/master/PM%20watch%20in%20systray/Files%20for%20optional%20features)  
-   - In `GmailAPI.py`, modify the `path_to_token_pickle` in `service_account_login()`
+   - In `GmailAPI.py`, modify the `path_to_token_pickle` in `service_account_login()`, and the `to` and `sender` in ` main()`. Then run this `GmailAPI.py`: this will activate the  second credentials needed so you script won’t be blocked by Gmail when it sends an email (in the page opened automatically by the script, you need to confirm that you give access to your gmail account to the script). 
    - In `PMgeneral.pyw`, modify:  
         -  the path to import for `GmailAPI`  
         - the `to` and `sender` in temp_too_high()   
