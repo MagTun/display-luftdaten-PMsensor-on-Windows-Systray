@@ -91,7 +91,10 @@ def create_image(text1, text2, colortext=(0, 0, 0), coord=(0, 0)):
 def update_image_systray(systray):
     if pmwatch.connection_error == 2:
         create_image("X", "X")
-    elif pmwatch.pm10_rounded > 5:
+    elif pmwatch.pm10_rounded > 10:
+        create_image(f"{pmwatch.pm10_rounded}",
+                     f"{pmwatch.pm25_rounded}", (255, 0, 0))
+    elif pmwatch.pm25_rounded > 4:
         create_image(f"{pmwatch.pm10_rounded}",
                      f"{pmwatch.pm25_rounded}", (255, 0, 0))
     else:
