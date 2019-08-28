@@ -75,9 +75,9 @@ def create_image(text1, text2, colortext=(0, 0, 0), coord=(0, 0)):
 
     # set font + size of the text
     # ●  gif no pm2.5 then replace 30 by 35
-    font_type10 = ImageFont.truetype("arial.ttf", 30)
-    d.text(coord, text1, colortext, font=font_type10)   # write the value pm10
-    font_type25 = ImageFont.truetype("arial.ttf", 25)
+    font_type10 = ImageFont.truetype("arial.ttf", 30)  # font type and size
+    d.text(coord, text1, colortext, font=font_type10)   # write the value pm10  coord = (x,y)
+    font_type25 = ImageFont.truetype("arial.ttf", 28)
     # write the value pm2.5
     d.text((1, 26), text2, colortext, font=font_type25)
     # img.save(pmwatch.iconname)  # save the image
@@ -162,8 +162,8 @@ def settempmax(systray):
 
 # quit the script when click on "Quit" in systray menu
 def on_quit_callback(systray):
-    systray.shutdown()
-    sys.exit()
+    # systray.shutdown() # when the script is killed, systray.shutdown(), keeps it running in background so it isn't used and we need to over the icon in systray to remove it
+    sys.exit()  
 
 
 def reload_script(systray):
@@ -171,19 +171,19 @@ def reload_script(systray):
     if pmwatch.icontext == "Out":
         os.startfile(
             r"PM sensor1.pyw") # modify this
-        systray.shutdown()
+        # systray.shutdown()
         sleep(3)
         sys.exit()
     if pmwatch.icontext == "In":
         os.startfile(
             r"PM sensor1.pyw") # modify this
-        systray.shutdown()
+        # systray.shutdown()
         sleep(3)
         sys.exit()
 
     if pmwatch.icontext == "test":
         print("\n\n\n\n")
-        systray.shutdown()
+        # systray.shutdown()
         child = subprocess.Popen(
             ['python', r'\PMgeneral.pyw'], shell=True, stdout=subprocess.PIPE)  # modify this
         output, error = child.communicate()
